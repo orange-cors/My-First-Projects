@@ -1,0 +1,45 @@
+/* Define color with css variable */
+:root {
+    --bg-color: #f1f2f3;
+    --calculator-bg: #ffffff;
+    --display-text-color: #222;
+    --button-bg: #fafafa;
+    --button-text-color: #333;
+    --button-hover-bg: #eaeaea;
+    --operator-button-bg: #ff9f0a;
+    --operator-text-color: #ffffff;
+    --operator-hover-bg: #f08e00;
+    --function-button-bg: #e0e0e0;
+    --function-button-text: #333;
+    --function-hover-bg: #d4d4d4;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Color definition for dark theme */
+body.dark-theme {
+    --bg-color: #121212;
+    --calculator-bg: #1c1c1c;
+    --display-text-color: #ffffff;
+    --button-bg: #333333;
+    --button-text-color: #ffffff;
+    --button-hover-bg: #444444;
+    --operator-button-bg: #ff9f0a;
+    --operator-text-color: #ffffff;
+    --operator-hover-bg: #f08e00;
+    --function-button-bg: #a5a5a5;
+    --function-button-text: #1c1c1c;
+    --function-hover-bg: #b7b7b7;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* General settings */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+}
