@@ -1,4 +1,3 @@
-/* --- BỘ NÃO CỦA MÁY TÍNH (LOGIC) --- */
 class Calculator {
     // Hàm khởi tạo, nhận 2 phần tử HTML để hiển thị
     constructor(previousOperandTextElement, currentOperandTextElement) {
