@@ -3,33 +3,35 @@
     --bg-color: #f1f2f3;
     --calculator-bg: #ffffff;
     --display-text-color: #222;
-    --button-bg: #fafafa;
+    --button-bg: #D9D9D9;
     --button-text-color: #333;
-    --button-hover-bg: #eaeaea;
+    --button-hover-bg: #bbb9b9;
     --operator-button-bg: #ff9f0a;
     --operator-text-color: #ffffff;
     --operator-hover-bg: #f08e00;
-    --function-button-bg: #e0e0e0;
+    --function-button-bg: #FDFDFD;
     --function-button-text: #333;
-    --function-hover-bg: #d4d4d4;
+    --function-hover-bg: #f8eded;
     --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --shadow-but: 0 2px 6px rgba(255, 4, 4, 0.15);
 }
 
 /* Color definition for dark theme */
 body.dark-theme {
     --bg-color: #121212;
-    --calculator-bg: #1c1c1c;
+    --calculator-bg: #303030;
     --display-text-color: #ffffff;
-    --button-bg: #333333;
-    --button-text-color: #ffffff;
-    --button-hover-bg: #444444;
+    --button-bg: #D9D9D9;
+    --button-text-color: #333;
+    --button-hover-bg: #bbb9b9;
     --operator-button-bg: #ff9f0a;
     --operator-text-color: #ffffff;
     --operator-hover-bg: #f08e00;
-    --function-button-bg: #a5a5a5;
-    --function-button-text: #1c1c1c;
-    --function-hover-bg: #b7b7b7;
-    --shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    --function-button-bg: #ffffff;
+    --function-button-text: #333;
+    --function-hover-bg: #f8eded;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --shadow-but: 0 1px 2px rgb(99, 113, 244);
 }
 
 /* General settings */
@@ -37,9 +39,144 @@ body.dark-theme {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
+    font-family: Roboto /*main font*/, sans-serif/*secondary font*/;
 }
 
 body {
+    display: flex; /* body -> flex container */
+    justify-content: center; /* center elements horizontally */
+    align-items: center; /* center elements vertically */
+    min-height: 100vh; /* minimum height is 100% of browser window */
+    background-color: var(--bg-color); /* css variable */
+    transition: background-color 0.3s ease; /* smooth anim (color) */
+}
+
+#theme-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+
+    border: none;
+    background-color: var(--operator-button-bg);
+    color: var(--operator-text-color);
+    cursor: pointer;
+
     display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 1.7rem; 
+}
+
+.calculator {
+    width: 280px;
+    border-radius: 24px; 
+    overflow: hidden; 
+    background-color: var(--calculator-bg);
+    box-shadow: var(--shadow);
+    transition: background-color 0.3s ease;
+}
+
+.display {
+    background-color: var(--calculator-bg); /* color: display = calc */
+    color: var(--display-text-color);
+    padding: 120px 20px; /* Create padding inside the screen: top-bottom and left-rig */
+    text-align: right; /* display -> rig */
+    min-height: 100px;
+    display: flex;
+    flex-direction: column; /* old num and current num are stacked vertically */
+    justify-content: flex-end; /*  bottom of the screen */
+    word-wrap: break-word;
+    word-break: break-all; /* sol when user enters a number that is too long */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.previous-operand {
+    font-size: 1.2rem;
+    color: #888;
+}
+
+.current-operand {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.buttons {
+    display: grid; /* Grid Container */
+    justify-content: center;
+    grid-template-columns: repeat(4, 1fr); /* 4 columns of equal width */
+    gap: 10px; /* distance (gap) between butt */
+    align-items: center;
+    justify-items: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.buttons button {
+    border: none;
+    font-size: 1.3rem;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: var(--button-bg);
+    color: var(--button-text-color);
+    transition: background-color 0.3s ease, box-shadow 0.1s ease, transform 0.1s ease;
+    box-shadow: var(--shadow-but);
+}
+
+.buttons button:hover {
+    background-color: var(--button-hover-bg);
+}
+
+.buttons .zero {
+    grid-column: span 2;
+    width: 117px;
+    border-radius: 34px;
+    justify-self: center;
+    text-align: left;
+    padding-left: 20px;
+}
+
+.buttons .function {
+    background-color: var(--function-button-bg);
+}
+
+.buttons .function:hover {
+    background-color: var(--function-hover-bg);
+}
+
+.buttons .operator {
+    background-color: var(--operator-button-bg);
+    color: var(--operator-text-color);
+}
+
+.buttons .operator:hover {
+    background-color: var(--operator-hover-bg);
+}
+
+.buttons .operator:hover {
+    background-color: var(--operator-hover-bg);
+}
+
+.buttons .function:hover {
+    background-color: var(--function-hover-bg);
+}
+
+
+/* Default (Light Mode) */
+#theme-toggle .fa-cloud-moon {
+    display: none;
+}
+
+/* Hide LightMode */
+body.dark-theme #theme-toggle .fa-cloud-sun {
+    display: none;
+}
+/* Show DarkMode */
+body.dark-theme #theme-toggle .fa-cloud-moon {
+    display: inline-block;
 }

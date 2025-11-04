@@ -5,26 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculator</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
+    <button id="theme-toggle">
+    <i class="fa-solid fa-cloud-sun"></i> <i class="fa-solid fa-cloud-moon"></i> </button>
     <div class="calculator">
-        <div class="display">0</div>
+        <div class="display">
+            <div class="previous-operand"></div>
+            <div class="current-operand">0</div>
+        </div>
         <div class="buttons">
 
             <button data-all-clear class="function">AC</button>
-            <button data-first-clear class="function">Del</button>
-            <button data-operator class="operator">%</button>
+            <button data-delete class="function">Del</button>
+            <button data-percent class="operator">%</button>
             <button data-operator class="operator">÷</button>
 
             <button data-number>7</button>
             <button data-number>8</button>
             <button data-number>9</button>
-            <button data-operator class="operator">x</button>
+            <button data-operator class="operator">×</button>
 
             <button data-number>4</button>
             <button data-number>5</button>
             <button data-number>6</button>
-            <button data-operator class="operator">-</button>
+            <button data-operator class="operator">–</button>
 
             <button data-number>1</button>
             <button data-number>2</button>
@@ -37,5 +43,6 @@
 
         </div>
     </div>
+    <script src="script.js"></script>
 </body>
 </html>
