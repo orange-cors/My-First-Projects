@@ -9,6 +9,12 @@ body {
 
 #chessboard {
     display: grid;
+
+    width: 95vw;
+
+    aspect-ratio: 1 / 1;
+
+    max-width: 560px;
     
     /*  8columns / 70px */
     grid-template-columns: repeat(8, 70px);
@@ -48,7 +54,7 @@ body {
 /* * Style the chess pieces
  */
 .piece {
-    font-size: 48px; /* Pieces size */
+    font-size: clamp(30px, 10vw, 48px); /* Pieces size */
     cursor: grab;
     
     /* Border color */
