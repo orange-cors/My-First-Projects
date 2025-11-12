@@ -206,9 +206,9 @@ document.addEventListener('DOMContentLoaded', () => {
             // Kiểm tra xem quân bị ăn có phải là Tướng không
             if (capturedPieceChar.toLowerCase() === 'k') {
                 // Lấy tên người chiến thắng
-                const winner = (currentPlayer === 'white-piece') ? 'Trắng' : 'Đen';
+                const winner = (currentPlayer === 'white-piece') ? 'White' : 'Black';
                 // Gọi hàm kết thúc trò chơi
-                showGameOver(`GAME OVER!\nQuân ${winner} chiến thắng!`);
+                showGameOver(`GAME OVER!\nThe ${winner} is winner!`);
                 return; // Dừng hàm tại đây, không đổi lượt nữa
             }
             // --- ⭐ KẾT THÚC THÊM MỚI ⭐ ---
@@ -383,6 +383,5 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // --- Bắt đầu chạy chương trình ---
     createBoard();
-    console.log("Dự án Cờ Vua đã tải xong!");
 
 });

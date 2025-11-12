@@ -64,16 +64,17 @@ body {
 /* * Style the chess pieces
  */
 .piece {
-    /* SỬA DÒNG CŨ: 
-      font-size: clamp(30px, 10vw, 48px);
-
-      THÀNH DÒNG MỚI: (Dùng vmin)
-      Kích thước icon = 8% của chiều ngắn nhất (vmin).
-    */
-    font-size: 8vmin;
+    /* Sửa lại: Dùng clamp() với VMIN */
+    font-size: clamp(30px, 8vmin, 48px);
     
-    /* Đặt kích thước TỐI ĐA (khớp với 48px cũ của bạn) */
-    max-font-size: 48px; 
+    /* * Giải thích:
+     * - Nhỏ nhất: 30px (cho màn hình siêu nhỏ)
+     * - Ưu tiên: 8vmin (để nó co dãn CÙNG TỶ LỆ với bàn cờ 95vmin)
+     * - Lớn nhất: 48px (kích thước tối đa bạn muốn trên máy tính)
+    */
+    
+    /* XÓA DÒNG NÀY ĐI (VÌ NÓ SAI): */
+    /* max-font-size: 48px; */ 
 
     /* Giữ nguyên các thuộc tính còn lại */
     cursor: grab;
