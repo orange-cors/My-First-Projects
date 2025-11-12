@@ -10,21 +10,31 @@ body {
 #chessboard {
     display: grid;
 
-    width: 95vw;
-
-    aspect-ratio: 1 / 1;
-
-    max-width: 560px;
+    /* Dùng vmin (chiều nhỏ nhất) để nó luôn vuông và vừa vặn */
+    width: 95vmin;
+    height: 95vmin;
     
-    /*  8columns / 70px */
-    grid-template-columns: repeat(8, 70px);
+    /* XÓA 2 DÒNG CŨ:
+      width: 95vw;
+      aspect-ratio: 1 / 1;
+    */
+    
+    /* Đặt kích thước TỐI ĐA (cho máy tính) */
+    max-width: 560px;
+    max-height: 560px;
+    
+    /* SỬA 2 DÒNG NÀY:
+      grid-template-columns: repeat(8, 70px);
+      grid-template-rows: repeat(8, 70px);
+      
+      THÀNH 2 DÒNG NÀY: (Dùng '1fr' để nó tự chia 8 cột/hàng bằng nhau)
+    */
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
 
-    /*  8rows / 70px */
-    grid-template-rows: repeat(8, 70px);
-    /* chessboard corner border */
+    /* Giữ nguyên các thuộc tính còn lại */
     border-radius: 3px;
     overflow: hidden;
-    /* shadow of the chessboard border */
     box-shadow: 0 0 20px rgba(144, 238, 146, 0.5);
     user-select: none;
 }
@@ -54,12 +64,21 @@ body {
 /* * Style the chess pieces
  */
 .piece {
-    font-size: clamp(30px, 10vw, 48px); /* Pieces size */
-    cursor: grab;
+    /* SỬA DÒNG CŨ: 
+      font-size: clamp(30px, 10vw, 48px);
+
+      THÀNH DÒNG MỚI: (Dùng vmin)
+      Kích thước icon = 8% của chiều ngắn nhất (vmin).
+    */
+    font-size: 8vmin;
     
-    /* Border color */
+    /* Đặt kích thước TỐI ĐA (khớp với 48px cũ của bạn) */
+    max-font-size: 48px; 
+
+    /* Giữ nguyên các thuộc tính còn lại */
+    cursor: grab;
     text-shadow: 
-        -1px -1px 0 #333,
+        -1px -1px 0 #333,  
          1px -1px 0 #333,
         -1px  1px 0 #333,
          1px  1px 0 #333;
