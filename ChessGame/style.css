@@ -65,18 +65,7 @@ body {
  */
 .piece {
     /* Sửa lại: Dùng clamp() với VMIN */
-    font-size: clamp(30px, 8vmin, 48px);
-    
-    /* * Giải thích:
-     * - Nhỏ nhất: 30px (cho màn hình siêu nhỏ)
-     * - Ưu tiên: 8vmin (để nó co dãn CÙNG TỶ LỆ với bàn cờ 95vmin)
-     * - Lớn nhất: 48px (kích thước tối đa bạn muốn trên máy tính)
-    */
-    
-    /* XÓA DÒNG NÀY ĐI (VÌ NÓ SAI): */
-    /* max-font-size: 48px; */ 
-
-    /* Giữ nguyên các thuộc tính còn lại */
+    font-size: clamp(30px, 8vmin, 45px);
     cursor: grab;
     text-shadow: 
         -1px -1px 0 #333,  
