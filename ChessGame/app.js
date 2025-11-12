@@ -186,10 +186,11 @@ document.addEventListener('DOMContentLoaded', () => {
         sourceSquareCoords = null;
     }
 
-    // Cập nhật cả mảng logic (currentBoardState)
+    // Hàm di chuyển VÀ phát âm thanh
     function movePiece(from, to) {
-        // 1. Kiểm tra xem có phải ăn quân không
-        const isCapture = currentBoardState[to.row][to.col] !== '';
+        // 1. Kiểm tra xem có phải ăn quân không (TRƯỚC KHI di chuyển)
+        const capturedPieceChar = currentBoardState[to.row][to.col];
+        const isCapture = capturedPieceChar !== '';
         
         // 2. Di chuyển quân cờ (logic cũ)
         const piece = currentBoardState[from.row][from.col];
@@ -198,14 +199,23 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // 3. Phát âm thanh
         if (isCapture) {
-            // Nếu ăn quân, chỉ phát âm thanh ăn quân
             captureSound.currentTime = 0;
             captureSound.play();
-        } else {
-            // Nếu là di chuyển thường, kiểm tra lượt
             
+            // --- ⭐ BẮT ĐẦU THÊM MỚI ⭐ ---
+            // Kiểm tra xem quân bị ăn có phải là Tướng không
+            if (capturedPieceChar.toLowerCase() === 'k') {
+                // Lấy tên người chiến thắng
+                const winner = (currentPlayer === 'white-piece') ? 'Trắng' : 'Đen';
+                // Gọi hàm kết thúc trò chơi
+                showGameOver(`GAME OVER!\nQuân ${winner} chiến thắng!`);
+                return; // Dừng hàm tại đây, không đổi lượt nữa
+            }
+            // --- ⭐ KẾT THÚC THÊM MỚI ⭐ ---
+
+        } else {
+            // (Code phát âm thanh di chuyển thường, giữ nguyên)
             if (currentPlayer === 'white-piece') {
-                // Lượt của Trắng
                 if (isWhiteSoundOne) {
                     whiteTurn1Sound.currentTime = 0;
                     whiteTurn1Sound.play();
@@ -213,11 +223,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     whiteTurn2Sound.currentTime = 0;
                     whiteTurn2Sound.play();
                 }
-                // Đảo biến để lần sau phát âm thanh còn lại
                 isWhiteSoundOne = !isWhiteSoundOne; 
-                
             } else {
-                // Lượt của Đen
                 if (isBlackSoundOne) {
                     blackTurn1Sound.currentTime = 0;
                     blackTurn1Sound.play();
@@ -225,12 +232,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     blackTurn2Sound.currentTime = 0;
                     blackTurn2Sound.play();
                 }
-                // Đảo biến để lần sau phát âm thanh còn lại
                 isBlackSoundOne = !isBlackSoundOne;
             }
         }
     }
-
     // 5. HÀM KIỂM TRA LUẬT CHƠI (Validation)
     
     function isValidMove(piece, from, to) {
@@ -341,9 +346,43 @@ document.addEventListener('DOMContentLoaded', () => {
         return isPathClear(from, to);
     }
 
+    function resetGame() {
+        // 1. Reset mảng logic về ban đầu
+        //    (Lưu ý: Phải .map() để tạo bản sao mới)
+        currentBoardState = initialBoardState.map(row => [...row]);
+        
+        // 2. Reset lượt chơi
+        currentPlayer = 'white-piece';
+        
+        // 3. Reset biến âm thanh
+        isWhiteSoundOne = true;
+        isBlackSoundOne = true;
+        
+        // 4. Xóa lựa chọn (nếu có)
+        clearSelection();
+        
+        // 5. Vẽ lại bàn cờ
+        createBoard();
+        
+        console.log("Bàn cờ đã được tải lại.");
+    }
 
+    function showGameOver(message) {
+        // Dùng setTimeout để âm thanh "ăn quân" kịp phát
+        setTimeout(() => {
+            
+            // 1. Hiển thị thông báo
+            //    (Code JavaScript sẽ dừng ở đây cho đến khi user nhấn OK)
+            alert(message);
+            
+            // 2. Sau khi user nhấn OK, tải lại bàn cờ
+            resetGame();
+
+        }, 300); // Đợi 300ms cho âm thanh
+    }
+    
     // --- Bắt đầu chạy chương trình ---
     createBoard();
-    console.log("Buổi 2&3: Bàn cờ có logic di chuyển đã sẵn sàng!");
+    console.log("Dự án Cờ Vua đã tải xong!");
 
 });
